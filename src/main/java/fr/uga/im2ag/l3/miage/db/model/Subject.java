@@ -2,14 +2,38 @@ package fr.uga.im2ag.l3.miage.db.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
+
+@Entity
+@Table(name = "Subject")
 public class Subject {
 
+    @Id
+    @GeneratedValue
+    @Column(name="SubjectId")
     private Long id;
+
+   
+    @Column(name="subjectName", nullable = false)
     private String name;
+
+    @Column(name="subjectPoints")
     private Integer points;
+
+    @Column(name="subjectHours", nullable = false)
     private Float hours;
+
+    @Column(name="subjectStart", nullable = false)
     private Date start;
+
+    @Column(name="subjectEnd" , nullable = false)
     private Date end;
 
     public Long getId() {
