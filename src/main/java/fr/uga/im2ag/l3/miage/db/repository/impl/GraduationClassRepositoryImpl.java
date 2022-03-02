@@ -30,8 +30,8 @@ public class GraduationClassRepositoryImpl extends BaseRepositoryImpl implements
 
     @Override
     public GraduationClass findById(Long id) {
-        // TODO
-        return null;
+        
+        return entityManager.find(GraduationClass.class, id);
     }
 
     @Override

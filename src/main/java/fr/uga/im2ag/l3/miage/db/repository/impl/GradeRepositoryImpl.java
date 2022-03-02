@@ -20,14 +20,19 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
 
     @Override
     public List<Grade> findHighestGrades(int limit) {
-        // TODO
-        return null;
+        
+        return  entityManager.createQuery("select G from Grade G order by G.value DESC", Grade.class)
+                    .setMaxResults(limit)
+                    .getResultList() ;
     }
 
     @Override
     public List<Grade> findHighestGradesBySubject(int limit, Subject subject) {
-        // TODO
-        return null;
+        // je ne sais pas pourquoi order by DESC marche bien.
+        return entityManager.createQuery("select G from Grade G where subjectGrade = :SubjectId order by G.value desc",Grade.class)
+                            .setParameter("SubjectId", subject.getId())
+                            .setMaxResults(limit)
+                            .getResultList();
     }
 
     @Override
@@ -47,7 +52,7 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
 
     @Override
     public List<Grade> getAll() {
-        // TODO
-        return entityManager.createNamedQuery("Grade.getAll", Grade.class).getResultList();
+        
+        return entityManager.createNamedQuery("select G from Grade G", Grade.class).getResultList();
     }
 }

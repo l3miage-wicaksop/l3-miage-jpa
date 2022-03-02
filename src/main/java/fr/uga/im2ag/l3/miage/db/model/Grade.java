@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
 @Table(name="Grade")
@@ -31,6 +33,7 @@ public class Grade {
     private Subject subject;
 
     @Column(name="gradeValue")
+    @Type(type="float")
     private Float value;
 
     @Column(name="gradeWeight")

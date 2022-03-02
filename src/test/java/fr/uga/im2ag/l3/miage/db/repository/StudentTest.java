@@ -1,9 +1,12 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
+import fr.uga.im2ag.l3.miage.db.model.GraduationClass;
+import fr.uga.im2ag.l3.miage.db.model.Student;
 import fr.uga.im2ag.l3.miage.db.repository.api.StudentRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class StudentTest extends Base {
 
@@ -24,6 +27,16 @@ class StudentTest extends Base {
     @Test
     void shouldSaveStudent() {
         // TODO
+        
+        GraduationClass gclass1 = new GraduationClass();
+
+        gclass1.setId((long) 2012);
+        gclass1.setName("Alpha Beta Gamma");
+        gclass1.setYear(2021);
+
+        Student student1 = Fixtures.createStudent(gclass1);
+
+        assertThat(student1).isNotNull();
     }
 
     @Test

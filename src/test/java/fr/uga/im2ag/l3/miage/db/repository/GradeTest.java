@@ -1,5 +1,6 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
+import fr.uga.im2ag.l3.miage.db.model.Grade;
 import fr.uga.im2ag.l3.miage.db.repository.api.GradeRepository;
 import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 
@@ -8,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
 
 class GradeTest extends Base {
 
@@ -41,9 +44,6 @@ class GradeTest extends Base {
         var pGrade = gradeRepository.findById(grade.getId());
         assertThat(pGrade).isNotNull().isNotEqualTo(grade);
         assertThat(pGrade.getId()).isEqualTo(grade.getId());
-
-        
-
         
     }
 
@@ -55,12 +55,83 @@ class GradeTest extends Base {
 
     @Test
     void shouldFindHighestGrades() {
-        // TODO
+        final var subject = Fixtures.createSubject();
+        final var grade1 = Fixtures.createGrade(subject);
+        final var grade2 = Fixtures.createGrade(subject);
+        final var grade3 = Fixtures.createGrade(subject);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(subject); // need to persist the subject to avoid error
+        gradeRepository.save(grade1);
+        gradeRepository.save(grade2);
+        gradeRepository.save(grade3);
+        entityManager.getTransaction().commit();
+        
+        grade1.setValue((float) 10.5);
+        grade2.setValue((float) 12.5);
+        grade3.setValue((float) 19.5);
+
+        var result = gradeRepository.findHighestGrades(1);
+
+        assertThat(result).isNotNull();
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).getValue()).isEqualTo(grade3.getValue());
+        
+
     }
 
     @Test
     void shouldFindHighestGradesBySubject() {
         // TODO
+
+        final var subject1 = Fixtures.createSubject();
+        final var subject2 = Fixtures.createSubject();
+
+
+        final var grade1Subject1 = Fixtures.createGrade(subject1);
+        final var grade2Subject1 = Fixtures.createGrade(subject1);
+        final var grade3Subject1 = Fixtures.createGrade(subject1);
+        
+        final var grade1Subject2 = Fixtures.createGrade(subject2);
+        final var grade2Subject2 = Fixtures.createGrade(subject2);
+        final var grade3Subject2 = Fixtures.createGrade(subject2);
+
+        
+        grade1Subject1.setValue((float) 7);
+        grade2Subject1.setValue((float) 18);
+        grade3Subject1.setValue((float) 19);
+
+        grade1Subject2.setValue((float) 1.2);
+        grade2Subject2.setValue((float) 18.1);
+        grade3Subject2.setValue((float) 19.7);
+
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(subject1); // need to persist the subject to avoid error
+        entityManager.persist(subject2); // need to persist the subject to avoid error
+        gradeRepository.save(grade1Subject1);
+        gradeRepository.save(grade2Subject1);
+        gradeRepository.save(grade3Subject1);
+        
+        gradeRepository.save(grade1Subject2);
+        gradeRepository.save(grade2Subject2);
+        gradeRepository.save(grade3Subject2);
+        
+        entityManager.getTransaction().commit();
+
+        var limit = 1;
+        var resultSubject1 = gradeRepository.findHighestGradesBySubject(limit, subject1);
+
+        assertThat(resultSubject1).isNotNull();
+        assertThat(resultSubject1.size()).isEqualTo(limit);
+        assertThat(resultSubject1.get(0).getValue()).isEqualTo(grade3Subject1.getValue());
+
+        var resultSubject2 = gradeRepository.findHighestGradesBySubject(limit, subject2);
+
+        assertThat(resultSubject2).isNotNull();
+        assertThat(resultSubject2.size()).isEqualTo(limit);
+        assertThat(resultSubject2.get(0).getValue()).isEqualTo(grade3Subject2.getValue());
+
     }
 
 }

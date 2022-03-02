@@ -1,7 +1,7 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
 import fr.uga.im2ag.l3.miage.db.model.Subject;
-import fr.uga.im2ag.l3.miage.db.model.Teacher;
+
 import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,32 +47,37 @@ class SubjectTest extends Base {
 
     @Test
     void shouldFindTeachersForSubject() {
-        final var subject1 = new Subject();
+        
+        final var subject1 = Fixtures.createSubject();
+        final var subject2 = Fixtures.createSubject();
+        final var subject3 = Fixtures.createSubject();
 
-        subject1.setId((long) 101);
-        subject1.setName("informatique");
-        subject1.setPoints(2);
-        System.out.println(subject1.getName());
+        
 
-        Subject result = subjectRepository.findById((long) 101);
-        System.out.println(result.getName());
-        // // case of many subjects
-        // final var subject1 = Fixtures.createSubject();
-        // final var subject2 = Fixtures.createSubject();
-        // final var subject3 = Fixtures.createSubject();
-        // entityManager.persist(subject1);
-        // entityManager.persist(subject2);
-        // entityManager.persist(subject3);
+        entityManager.persist(subject1);
+        entityManager.persist(subject2);
+        entityManager.persist(subject3);
 
+        entityManager.getTransaction().begin();
+        subjectRepository.save(subject1);
+        subjectRepository.save(subject2);
+        subjectRepository.save(subject3);
+        entityManager.getTransaction().commit();
+        entityManager.detach(subject1);
+        entityManager.detach(subject2);
+        entityManager.detach(subject3);
+
+        
+        
         // // a list of subjects
-        // List<Subject> subjects = new ArrayList<Subject>();
-        // subjects.add(subject1);
-        // subjects.add(subject2);
-        // subjects.add(subject3);
+        List<Subject> subjects = new ArrayList<Subject>();
+        subjects.add(subject1);
+        subjects.add(subject2);
+        subjects.add(subject3);
 
         // // one graduation class
-        // final var class1 = Fixtures.createClass();
-        // entityManager.persist(class1);
+        final var class1 = Fixtures.createClass();
+        entityManager.persist(class1);
 
         // // case of 2 students
         // final var student1 = Fixtures.createStudent(class1);
