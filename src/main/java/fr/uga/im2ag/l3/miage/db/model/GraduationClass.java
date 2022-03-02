@@ -7,11 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
+@NamedQuery(name = "GraduationClass.getAll", query = "select g from GraduationClass g")
 @Entity
 @Table(name="GraduationClass")
 public class GraduationClass {
@@ -19,9 +21,13 @@ public class GraduationClass {
     @GeneratedValue
     @Column(name="graduationClassId")
     private Long id;
+
+    @Column(name="graduationClassName", nullable=false, unique = true )
     private String name;
+    @Column(name="graduationClassYear", nullable=false )
     private Integer year;
-    @OneToMany(targetEntity = Student.class)
+
+    @OneToMany(targetEntity = Student.class, mappedBy = "belongTo")
     private List<Student> students;
 
     public Long getId() {

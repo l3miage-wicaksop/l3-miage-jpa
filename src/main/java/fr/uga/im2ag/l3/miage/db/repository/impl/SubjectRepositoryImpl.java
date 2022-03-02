@@ -34,13 +34,13 @@ public class SubjectRepositoryImpl extends BaseRepositoryImpl implements Subject
 
     @Override
     public List<Subject> getAll() {
-        // TODO
+        
         return entityManager.createNamedQuery("select S from Subject", Subject.class).getResultList();
     }
 
     @Override
     public Collection<Teacher> findTeachers(Long id) {
-        // TODO
+        
         return entityManager.createNamedQuery("select name from Teacher where id=:id", Teacher.class).setParameter("id", id).getResultList();
     }
 }

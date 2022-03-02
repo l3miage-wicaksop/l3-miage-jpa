@@ -29,28 +29,52 @@ class GraduationClassTest extends Base {
         // TODO
         
         
-        GraduationClass gclass1 = new GraduationClass();
+        final var gclass1 = new GraduationClass();
 
-        gclass1.setId((long) 2012);
+        
         gclass1.setName("Alpha Beta Gamma");
         gclass1.setYear(2021);
 
-        Student student1 = Fixtures.createStudent(gclass1);
-        Student student2 = Fixtures.createStudent(gclass1);
+        final var student1 = Fixtures.createStudent(gclass1);
+        final var student2 = Fixtures.createStudent(gclass1);
+
+        // entityManager.persist(student1);
+        // entityManager.persist(student2);
 
         
-        
+        entityManager.getTransaction().begin();
+        classRepository.save(gclass1);
+        entityManager.getTransaction().commit();
+        entityManager.detach(gclass1);
 
-        assertThat(gclass1).isNotNull();
-        assertThat(student1).isNotNull();
-        assertThat(student2).isNotNull();
+        var result = classRepository.findById(gclass1.getId());
+        assertThat(result).isNotNull().isNotSameAs(gclass1);
+        assertThat(result.getName()).isEqualTo(gclass1.getName());
 
     }
 
 
     @Test
     void shouldFindByYearAndName() {
-        // TODO
+        final var gclass1 = new GraduationClass();
+
+        
+        gclass1.setName("Alpha Beta Gamma");
+        gclass1.setYear(2021);
+
+        final var student1 = Fixtures.createStudent(gclass1);
+        final var student2 = Fixtures.createStudent(gclass1);
+
+        entityManager.getTransaction().begin();
+        classRepository.save(gclass1);
+        entityManager.getTransaction().commit();
+        entityManager.detach(gclass1);
+
+        var result = classRepository.findByYearAndName(2021, "Alpha Beta Gamma" );
+
+        assertThat(result).isNotNull().isNotEqualTo(gclass1);
+        assertThat(result.getId()).isEqualTo(gclass1.getId());
+
     }
 
 }

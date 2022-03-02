@@ -47,7 +47,7 @@ class SubjectTest extends Base {
 
     @Test
     void shouldFindTeachersForSubject() {
-        
+        // todo
         final var subject1 = Fixtures.createSubject();
         final var subject2 = Fixtures.createSubject();
         final var subject3 = Fixtures.createSubject();

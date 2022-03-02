@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -14,7 +15,7 @@ import javax.persistence.ForeignKey;
 @Entity
 // @DiscriminatorValue("Student")
 public class Student extends Person {
-    @ManyToOne(targetEntity = GraduationClass.class)
+    @ManyToOne(targetEntity = GraduationClass.class, cascade = CascadeType.ALL)
     private GraduationClass belongTo;
     
     @OneToMany(targetEntity  = Grade.class)
