@@ -29,7 +29,7 @@ public class SubjectRepositoryImpl extends BaseRepositoryImpl implements Subject
     @Override
     public Subject findById(Long id) {
         
-        return (Subject) entityManager.find(Subject.class, id);
+        return entityManager.find(Subject.class, id);
     }
 
     @Override

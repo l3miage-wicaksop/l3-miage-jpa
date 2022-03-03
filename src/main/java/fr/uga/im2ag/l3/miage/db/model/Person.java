@@ -12,16 +12,19 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 
 @Entity
-// @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-// @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "TYPE")
+
 public abstract class Person {
 
     @Id
     @GeneratedValue
     @Column(name="personID")
     private Long id;
+
+    @Column(name="personGender", nullable = false)
     private Gender gender;
+    @Column(name="personFirstName", nullable = false)
     private String firstName;
+    @Column(name="personLastName", nullable = false)
     private String lastName;
     private Date birth;
 

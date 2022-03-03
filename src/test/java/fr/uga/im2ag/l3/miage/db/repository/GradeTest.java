@@ -51,6 +51,8 @@ class GradeTest extends Base {
     //ici tester que la mise à jour n'a pas eu lieu.
     void shouldFailUpgradeGrade() {
         // TODO, ici tester que la mise à jour n'a pas eu lieu.
+        final var subject = Fixtures.createSubject();
+        assertThat(subject.getName()).isEqualTo("MAT1000000000000001");
     }
 
     @Test
