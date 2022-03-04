@@ -1,3 +1,7 @@
+# Noms du Binome:
+## SEVENIER Jonathan
+## WICAKSONO Pradityo Adi
+
 # TP JPA
 
 Vous avez deux scéance de TP pour en venir à bout, vous être libre de continuer chez vous.
