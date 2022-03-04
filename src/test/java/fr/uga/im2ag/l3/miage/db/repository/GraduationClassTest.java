@@ -26,7 +26,6 @@ class GraduationClassTest extends Base {
 
     @Test
     void shouldSaveClass() {
-        // TODO
         
         
         final var gclass1 = new GraduationClass();

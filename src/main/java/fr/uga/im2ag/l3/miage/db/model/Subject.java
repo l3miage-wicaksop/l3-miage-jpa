@@ -8,12 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-// TODO ajouter une named query pour une des requêtes à faire dans le repository
 
-@NamedQuery(name = "Subject.getAll", query = "select s from Subject s")
+@NamedQueries({
+    @NamedQuery(name = "Subject.getAll", query = "select s from Subject s"),
+    @NamedQuery(name = "Subject.findTeachers", query = "select T from Teacher T where id=:id"),
+})
+
 @Entity
 @Table(name = "Subject")
 public class Subject {

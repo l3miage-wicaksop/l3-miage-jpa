@@ -7,13 +7,22 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-// TODO ajouter une named query pour une des requêtes à faire dans le repository
+
+
 @Entity
 @Table(name="Grade")
+@NamedQueries({
+   
+    @NamedQuery(name = "Grade.findHighestGrades", query = "select G from Grade G order by G.value DESC"),
+    @NamedQuery(name="Grade.findHighestGradesBySubject", query = "select G from Grade G where subjectGrade = :SubjectId order by G.value desc"),
+    @NamedQuery(name="Grade.getAll", query = "select G from Grade G")
+})
 public class Grade {
 
     @Id

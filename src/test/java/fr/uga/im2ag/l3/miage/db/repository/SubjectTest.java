@@ -1,6 +1,5 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
-import fr.uga.im2ag.l3.miage.db.model.Subject;
 
 import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -8,10 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-
 class SubjectTest extends Base {
 
     SubjectRepository subjectRepository;

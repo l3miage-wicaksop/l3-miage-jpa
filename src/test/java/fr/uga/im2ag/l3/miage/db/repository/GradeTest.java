@@ -1,8 +1,6 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
-import fr.uga.im2ag.l3.miage.db.model.Grade;
 import fr.uga.im2ag.l3.miage.db.repository.api.GradeRepository;
-import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 
 class GradeTest extends Base {
 
@@ -84,7 +81,6 @@ class GradeTest extends Base {
 
     @Test
     void shouldFindHighestGradesBySubject() {
-        // TODO
 
         final var subject1 = Fixtures.createSubject();
         final var subject2 = Fixtures.createSubject();

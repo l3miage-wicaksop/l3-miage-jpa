@@ -3,13 +3,17 @@ package fr.uga.im2ag.l3.miage.db.model;
 import java.util.List;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
-
-// TODO ajouter une named query pour une des requêtes à faire dans le repository
+@NamedQueries({
+    @NamedQuery(name = "Student.getAll", query = "select S from Student S"),
+    @NamedQuery(name = "Student.findStudentHavingGradeAverageAbove", query = "select S from Student S JOIN S.grades G group by S.id having sum(G.value*G.weight)/sum(G.weight) >= :minAverage")
+})
 @Entity
 @Table(name="Student")
 public class Student extends Person {

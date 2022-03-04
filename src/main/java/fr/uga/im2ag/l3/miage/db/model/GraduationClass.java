@@ -7,13 +7,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
-@NamedQuery(name = "GraduationClass.getAll", query = "select g from GraduationClass g")
+@NamedQueries({
+    @NamedQuery(name = "GraduationClass.getAll", query = "select g from GraduationClass g"),
+    @NamedQuery(name = "GraduationClass.findByYearAndName", query = "select C from GraduationClass C where graduationClassName=:name and graduationClassYear=:year")
+})
+
 @Entity
 @Table(name="GraduationClass")
 public class GraduationClass {

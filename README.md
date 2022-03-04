@@ -122,3 +122,4 @@ C'est-à-dire que vous ne devez pas ajouter de dépendances dans `pom.xml`, vous
 
 Section en option si vous souhaitez justifier certains de vos choix dans votre implémentation. 
 
+FindHighestGrades sometimes shows correct answer, sometimes wrong answer. I don't understand

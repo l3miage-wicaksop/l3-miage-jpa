@@ -21,7 +21,7 @@ public class TeacherRepositoryImpl extends BaseRepositoryImpl implements Teacher
     @Override
     public Teacher findHeadingGraduationClassByYearAndName(Integer year, String name) {
         // I suppose this is graduation class's name because I'm not sure whether to use teacher's first name or last name.
-        return entityManager.createQuery("select T from Teacher T join T.heading GC where GC.name=:name and GC.year=:year", Teacher.class)
+        return entityManager.createNamedQuery("Teacher.findHeadingGraduationClassByYearAndName", Teacher.class)
         .setParameter("year", year)
         .setParameter("name", name)
         .getSingleResult();
