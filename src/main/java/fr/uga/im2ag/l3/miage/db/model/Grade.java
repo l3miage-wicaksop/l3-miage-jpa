@@ -41,7 +41,7 @@ public class Grade {
     )
     private Subject subject;
 
-    @Column(name="gradeValue")
+    @Column(name="gradeValue", updatable = false)
     @Type(type="float")
     private Float value;
 

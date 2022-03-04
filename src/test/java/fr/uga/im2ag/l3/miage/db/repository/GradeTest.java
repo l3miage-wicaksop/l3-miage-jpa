@@ -49,7 +49,25 @@ class GradeTest extends Base {
     void shouldFailUpgradeGrade() {
         // TODO, ici tester que la mise à jour n'a pas eu lieu.
         final var subject = Fixtures.createSubject();
-        assertThat(subject.getName()).isEqualTo("MAT1000000000000001");
+        final var grade = Fixtures.createGrade(subject);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(subject);
+        gradeRepository.save(grade);
+        entityManager.getTransaction().commit();
+
+        var result = gradeRepository.findById(grade.getId());
+        assertThat(result).isNotNull();
+
+        float oldGrade = grade.getValue();
+
+        var updateResult = entityManager.createQuery("update Grade set gradeValue = 2000 where gradeId =:ID").setParameter("ID", grade.getId());
+        assertThat(updateResult).isNotNull();
+
+        var result2 = gradeRepository.findById(grade.getId());
+
+        assertThat(result2.getValue()).isEqualTo(oldGrade);
+        
     }
 
     @Test
