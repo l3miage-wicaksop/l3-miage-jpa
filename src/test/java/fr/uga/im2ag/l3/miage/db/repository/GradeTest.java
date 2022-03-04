@@ -47,7 +47,6 @@ class GradeTest extends Base {
     @Test
     //ici tester que la mise à jour n'a pas eu lieu.
     void shouldFailUpgradeGrade() {
-        // TODO, ici tester que la mise à jour n'a pas eu lieu.
         final var subject = Fixtures.createSubject();
         final var grade = Fixtures.createGrade(subject);
 
