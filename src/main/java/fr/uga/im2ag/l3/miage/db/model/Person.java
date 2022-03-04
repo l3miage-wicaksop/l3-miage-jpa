@@ -3,12 +3,8 @@ package fr.uga.im2ag.l3.miage.db.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 
 @Entity

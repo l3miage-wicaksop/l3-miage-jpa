@@ -1,7 +1,6 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
 import fr.uga.im2ag.l3.miage.db.model.GraduationClass;
-import fr.uga.im2ag.l3.miage.db.model.Student;
 import fr.uga.im2ag.l3.miage.db.repository.api.GraduationClassRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,8 +36,8 @@ class GraduationClassTest extends Base {
         final var student1 = Fixtures.createStudent(gclass1);
         final var student2 = Fixtures.createStudent(gclass1);
 
-        // entityManager.persist(student1);
-        // entityManager.persist(student2);
+        entityManager.persist(student1);
+        entityManager.persist(student2);
 
         
         entityManager.getTransaction().begin();
@@ -63,6 +62,10 @@ class GraduationClassTest extends Base {
 
         final var student1 = Fixtures.createStudent(gclass1);
         final var student2 = Fixtures.createStudent(gclass1);
+
+        
+        entityManager.persist(student1);
+        entityManager.persist(student2);
 
         entityManager.getTransaction().begin();
         classRepository.save(gclass1);

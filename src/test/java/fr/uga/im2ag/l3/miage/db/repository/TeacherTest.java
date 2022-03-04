@@ -1,10 +1,8 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
-import fr.uga.im2ag.l3.miage.db.model.Teacher;
 import fr.uga.im2ag.l3.miage.db.repository.api.TeacherRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import java.util.Arrays;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
