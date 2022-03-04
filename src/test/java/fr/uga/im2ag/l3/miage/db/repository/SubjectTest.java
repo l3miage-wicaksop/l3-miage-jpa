@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 class SubjectTest extends Base {
@@ -47,63 +46,38 @@ class SubjectTest extends Base {
 
     @Test
     void shouldFindTeachersForSubject() {
-        // todo
-        final var subject1 = Fixtures.createSubject();
-        final var subject2 = Fixtures.createSubject();
-        final var subject3 = Fixtures.createSubject();
+        // declaring objects
+        final var subject = Fixtures.createSubject();
+        final var gradClass = Fixtures.createClass();
+        final var student1 = Fixtures.createStudent(gradClass);
+        final var student2 = Fixtures.createStudent(gradClass);
 
-        
 
-        entityManager.persist(subject1);
-        entityManager.persist(subject2);
-        entityManager.persist(subject3);
+       
+
+        // declaring teachers
+        final var teacher1 = Fixtures.createTeacher(subject, gradClass, student1, student2) ;
+        final var teacher2 = Fixtures.createTeacher(subject, gradClass, student1, student2) ;
+
+        // persisting things
+ 
 
         entityManager.getTransaction().begin();
-        subjectRepository.save(subject1);
-        subjectRepository.save(subject2);
-        subjectRepository.save(subject3);
+        subjectRepository.save(subject);
         entityManager.getTransaction().commit();
-        entityManager.detach(subject1);
-        entityManager.detach(subject2);
-        entityManager.detach(subject3);
+        entityManager.detach(subject);
+        // entityManager.detach(subject);
+
+        var results = subjectRepository.findById(subject.getId());
 
         
-        
-        // // a list of subjects
-        List<Subject> subjects = new ArrayList<Subject>();
-        subjects.add(subject1);
-        subjects.add(subject2);
-        subjects.add(subject3);
-
-        // // one graduation class
-        final var class1 = Fixtures.createClass();
-        entityManager.persist(class1);
-
-        // // case of 2 students
-        // final var student1 = Fixtures.createStudent(class1);
-        // final var student2 = Fixtures.createStudent(class1);
-        // entityManager.persist(student1);
-        // entityManager.persist(student2);
-
-        // // case of 2 teachers
-        // final var teacher1 = Fixtures.createTeacher(subject1, class1, student1, student2);
-        // final var teacher2 = Fixtures.createTeacher(subject2, class1, student2);
-
-        // entityManager.persist(teacher1);
-        // entityManager.persist(teacher2);
-
-        // // a list of teachers
-        // List<Teacher> teachers = new ArrayList<Teacher>();
-        // teachers.add(teacher1);
-        // teachers.add(teacher2);
-        
+        assertThat(results.getId()).isEqualTo(teacher1.getTeaching().getId());
+        assertThat(results.getId()).isEqualTo(teacher2.getTeaching().getId());
         
 
-        // for (Teacher teacher : teachers){
-        //    var res = (Collection<Teacher>) subjectRepository.findTeachers(teacher.getId());
-        //    assertThat(res).isNotNull();
-        // }
-        // TODO
+
+
+        
     }
 
 }

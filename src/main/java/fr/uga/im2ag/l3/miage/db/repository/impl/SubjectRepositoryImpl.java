@@ -41,6 +41,6 @@ public class SubjectRepositoryImpl extends BaseRepositoryImpl implements Subject
     @Override
     public Collection<Teacher> findTeachers(Long id) {
         
-        return entityManager.createNamedQuery("select name from Teacher where id=:id", Teacher.class).setParameter("id", id).getResultList();
+        return entityManager.createNamedQuery("select T from Teacher T where id=:id", Teacher.class).setParameter("id", id).getResultList();
     }
 }

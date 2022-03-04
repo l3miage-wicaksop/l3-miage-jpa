@@ -27,15 +27,18 @@ class TeacherTest extends Base {
 
     @Test
     void shouldSaveTeacher()  {
-        final var subject = Fixtures.createSubject();
+        
         final var gradClass = Fixtures.createClass();
-
+        final var subject = Fixtures.createSubject();
         final var student1 = Fixtures.createStudent(gradClass);
         final var student2 = Fixtures.createStudent(gradClass);
 
-        Teacher teacher = Fixtures.createTeacher(subject, gradClass, student1, student2) ;
+        final var teacher = Fixtures.createTeacher(subject, gradClass, student1, student2) ;
 
-
+        entityManager.persist(subject);
+        entityManager.persist(gradClass);
+        entityManager.persist(student1);
+        entityManager.persist(student2);
 
         entityManager.getTransaction().begin();
         teacherRepository.save(teacher);
@@ -52,7 +55,28 @@ class TeacherTest extends Base {
 
     @Test
     void shouldFindHeadingGraduationClassByYearAndName() {
-        // TODO
+        final var gradClass = Fixtures.createClass();
+        final var subject = Fixtures.createSubject();
+        final var student1 = Fixtures.createStudent(gradClass);
+        final var student2 = Fixtures.createStudent(gradClass);
+
+        final var teacher = Fixtures.createTeacher(subject, gradClass, student1, student2) ;
+
+        entityManager.persist(subject);
+        entityManager.persist(gradClass);
+        entityManager.persist(student1);
+        entityManager.persist(student2);
+
+        entityManager.getTransaction().begin();
+        teacherRepository.save(teacher);
+        entityManager.getTransaction().commit();
+        entityManager.detach(teacher);
+
+        var result = teacherRepository.findHeadingGraduationClassByYearAndName(teacher.getHeading().getYear(), teacher.getHeading().getName());
+
+        assertThat(result).isNotEqualTo(teacher);
+        assertThat(result.getFirstName()).isEqualTo(teacher.getFirstName());     
+
     }
 
 }
