@@ -52,6 +52,6 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
     @Override
     public List<Grade> getAll() {
         
-        return entityManager.createNamedQuery("select G from Grade G", Grade.class).getResultList();
+        return entityManager.createNamedQuery("Grade.getAll", Grade.class).getResultList();
     }
 }
